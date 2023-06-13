@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('SFProDisplay-Medium.eot');
+    src: local('SF Pro Display Medium'), local('SFProDisplay-Medium'),
+        url('SFProDisplay-Medium.eot?#iefix') format('embedded-opentype'),
+        url('SFProDisplay-Medium.woff2') format('woff2'),
+        url('SFProDisplay-Medium.woff') format('woff'),
+        url('SFProDisplay-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('SFProDisplay-Regular.eot');
+    src: local('SF Pro Display Regular'), local('SFProDisplay-Regular'),
+        url('SFProDisplay-Regular.eot?#iefix') format('embedded-opentype'),
+        url('SFProDisplay-Regular.woff2') format('woff2'),
+        url('SFProDisplay-Regular.woff') format('woff'),
+        url('SFProDisplay-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
