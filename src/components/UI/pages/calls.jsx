@@ -1,4 +1,9 @@
-import { Box, LinearProgress, Typography, styled } from "@mui/material";
+import {
+  Box,
+  LinearProgress,
+  Typography,
+  styled,
+} from "@mui/material";
 import React from "react";
 import Navbar from "../navbar/navbar";
 import { theme } from "../../../theme";
@@ -7,7 +12,8 @@ import { getCallsList } from "../../../store/calls-list.store";
 import useLocalDate from "../../../hooks/use-local-date";
 import WorkProgress from "../header/components/work-progress";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import profileAvatar from "../../../assets/images/header/profile-avatar.png"
+import DropdownProfile from "../../common/form/dropdown-profile";
+import DropdownCompany from "../../common/form/dropdown-company";
 
 const Component = styled(Box)`
   display: flex;
@@ -43,7 +49,6 @@ const CallsPage = () => {
       <Navbar />
       <Content>
         <Header sx={{ backgroundColor: theme.palette.header.background }}>
-
           <Box sx={{ display: "inline" }} mr="86px">
             <Typography
               noWrap
@@ -52,13 +57,12 @@ const CallsPage = () => {
               {dateNow}
             </Typography>
           </Box>
-
           <Box
             sx={{
               display: "flex",
               width: "100%",
               justifyContent: "space-between",
-              alignItems: 'center'
+              alignItems: "center",
             }}
           >
             <Box sx={{ display: "flex", width: "100%", gap: "50px" }}>
@@ -93,15 +97,10 @@ const CallsPage = () => {
                 }
               />
             </Box>
-
             <SearchOutlinedIcon sx={{ color: "#ADBFDF" }} />
           </Box>
-
-          <Box sx={{display: "flex", alignItems: 'center'}}>
-            <Typography noWrap>ИП Сидорова Александра Михайловна</Typography>
-            <Box><img src={profileAvatar} alt="Аватар" /></Box>
-          </Box>
-
+          <DropdownCompany />
+          <DropdownProfile />
         </Header>
       </Content>
     </Component>

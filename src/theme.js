@@ -43,6 +43,9 @@ export const theme = createTheme({
       textSecondary: {
         main: "rgba(94, 119, 147, 1)",
       },
+      icon: {
+        main: "rgba(173, 191, 223, 1)",
+      },
     },
     linearProgress: {
       green: {
@@ -55,8 +58,8 @@ export const theme = createTheme({
         main: "#EA1A4F",
       },
       background: {
-        main: "#DEE6F5"
-      }
+        main: "#DEE6F5",
+      },
     },
   },
   typography: {
