@@ -3,6 +3,13 @@ a {
   text-decoration: inherit;
 }
 
+.first {
+  font-size: 20px;
+}
+.second {
+  font-size: 10px;
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

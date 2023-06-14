@@ -21,6 +21,7 @@ function App() {
               <Route index path="/partner" element={<EmptyPage />} />
               <Route index path="/documents" element={<EmptyPage />} />
               <Route index path="/executors" element={<EmptyPage />} />
+              <Route index path="/reports" element={<EmptyPage />} />
               <Route index path="/knowledgebase" element={<EmptyPage />} />
               <Route index path="/settings" element={<EmptyPage />} />
             </Routes>

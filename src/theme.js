@@ -5,6 +5,13 @@ export const theme = createTheme({
     body: {
       main: "rgba(18, 41, 69, 1)",
     },
+    navbar: {
+      background: "rgba(216, 228, 251, 0.32)",
+      hover: "rgba(216, 228, 251, 0.32)",
+    },
+    button: {
+      navbar: "rgba(0, 95, 248, 1)",
+    },
     UI: {
       green: {
         main: "rgba(40, 168, 121, 1)",

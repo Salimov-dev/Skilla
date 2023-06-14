@@ -1,6 +1,7 @@
 import { Box, Button, Stack, styled, Typography } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { theme } from "../../../theme";
 import logo from "../../../assets/images/navBar/logo_skilla.svg";
 // icons
 import TimelineIcon from "@mui/icons-material/Timeline";
@@ -13,6 +14,8 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import LocalLibraryOutlinedIcon from "@mui/icons-material/LocalLibraryOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import addOrderIcon from "../../../assets/images/navBar/buttonAddOrder.svg";
+import paymentIcon from "../../../assets/images/navBar/buttonPayment.svg";
 
 const navBarItems = [
   { id: 1, text: "Итоги", icon: <TimelineIcon />, link: "/" },
@@ -54,7 +57,6 @@ const navBarItems = [
 
 const Component = styled(Box)`
   display: flex;
-  height: 100vh;
   background: #e5e5e5;
 `;
 
@@ -64,16 +66,10 @@ const Navbar = styled(Box)`
   background-color: #091336;
 `;
 
-const NavbarItemContainer = styled(Box)`
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  width: 100%;
-  height: 100%;
-`;
-
-const NavbarItemsContainer = styled(Box)`
+const NavbarListItems = styled(Box)`
   color: rgba(255, 255, 255, 0.6);
+  margin-top: 50px;
+  margin-bottom: 80px;
 `;
 
 const Logo = styled(`img`)({
@@ -89,9 +85,9 @@ const Nav = styled(`nav`)({
     height: "inherit",
     display: "flex",
     alignItems: "center",
-    background: "rgba(216, 228, 251, 0.32)",
+    background: theme.palette.navbar.background,
     borderLeft: "3px solid #002cfb",
-    color: "white !important",
+    color: "white",
   },
   "& .active::after": {
     position: "absolute",
@@ -110,11 +106,18 @@ const Li = styled(`li`)({
   width: "100%",
   display: "flex",
   alignItems: "center",
+  gap: "13px",
   "&:hover": {
     color: "white",
-    background: "rgba(216, 228, 251, 0.32)",
+    background: theme.palette.navbar.hover,
   },
 });
+
+const ButtonStyled = styled(Button)`
+  background-color: theme.palette.button.navbar;
+  padding: 14px;
+  text-transform: none;
+`;
 
 const CallsPage = () => {
   return (
@@ -124,24 +127,44 @@ const CallsPage = () => {
           <Logo src={logo} alt="Логотип" />
         </NavLink>
 
-        <NavbarItemsContainer>
+        <NavbarListItems>
           <Nav>
             {navBarItems.map((item) => (
               <NavLink to={item.link} key={item.id}>
-                <Li>
-                  <NavbarItemContainer>
-                    <Box sx={{ paddingLeft: "13px" }}>{item.icon}</Box>
+                {({ isActive }) => (
+                  <Li>
+                    <Box sx={{ paddingLeft: isActive ? "10px" : "13px" }}>
+                      {item.icon}
+                    </Box>
                     {item.text}
-                  </NavbarItemContainer>
-                </Li>
+                  </Li>
+                )}
               </NavLink>
             ))}
           </Nav>
-        </NavbarItemsContainer>
+        </NavbarListItems>
 
-        <Button>Добавить заказ</Button>
-        <Button>Оплата</Button>
+        <Stack spacing="32px" sx={{ padding: "0 20px" }}>
+          <ButtonStyled variant="contained">
+            <Typography
+              sx={{ fontWeight: "500", fontSize: "16px", marginLeft: "auto" }}
+            >
+              Добавить заказ
+            </Typography>
+            <img style={{ marginLeft: "auto" }} src={addOrderIcon} alt="!" />
+          </ButtonStyled>
+
+          <ButtonStyled variant="contained">
+            <Typography
+              sx={{ fontWeight: "500", fontSize: "16px", marginLeft: "auto" }}
+            >
+              Оплата
+            </Typography>
+            <img style={{ marginLeft: "auto" }} src={paymentIcon} alt="!" />
+          </ButtonStyled>
+        </Stack>
       </Navbar>
+
       <Box>Content</Box>
     </Component>
   );
