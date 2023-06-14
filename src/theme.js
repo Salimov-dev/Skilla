@@ -1,13 +1,16 @@
-import { colors, createTheme } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
   palette: {
     body: {
-      main: "rgba(18, 41, 69, 1)",
+      background: "#f1f4f9",
     },
     navbar: {
       background: "rgba(216, 228, 251, 0.32)",
       hover: "rgba(216, 228, 251, 0.32)",
+    },
+    header: {
+      background: "white",
     },
     button: {
       navbar: "rgba(0, 95, 248, 1)",
@@ -34,9 +37,26 @@ export const theme = createTheme({
       textHeader: {
         main: "rgba(137, 156, 177, 1)",
       },
+      textGreen: {
+        main: "rgba(0, 167, 117, 1)",
+      },
       textSecondary: {
         main: "rgba(94, 119, 147, 1)",
       },
+    },
+    linearProgress: {
+      green: {
+        main: "#28A879",
+      },
+      yellow: {
+        main: "#FFD500",
+      },
+      red: {
+        main: "#EA1A4F",
+      },
+      background: {
+        main: "#DEE6F5"
+      }
     },
   },
   typography: {
