@@ -4,16 +4,17 @@ import CallsPage from "./components/UI/pages/calls";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
 import EmptyPage from "./components/UI/pages/empty";
+import ScrollToTop from "./utils/scroll-to-top";
 
 function App() {
   return (
     <div className="App">
       <AppLoader>
         <ThemeProvider theme={theme}>
-          <CssBaseline/>
+          <CssBaseline />
           <BrowserRouter>
+            <ScrollToTop />
             <Routes>
-              {/* <Route index path="/" element={<CallsPage />} /> */}
               <Route index path="/" element={<EmptyPage />} />
               <Route index path="calls" element={<CallsPage />} />
               <Route index path="/orders" element={<EmptyPage />} />

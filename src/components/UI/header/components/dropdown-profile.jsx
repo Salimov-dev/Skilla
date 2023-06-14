@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Menu, Stack, Typography } from "@mui/material";
 import React from "react";
-import { theme } from "../../../theme";
-import profileAvatar from "../../../assets/images/header/profile-avatar.png";
+import { theme } from "../../../../theme";
+import profileAvatar from "../../../../assets/images/header/profile-avatar.png";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import KeyboardControlKeyOutlinedIcon from "@mui/icons-material/KeyboardControlKeyOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
