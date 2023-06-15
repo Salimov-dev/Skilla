@@ -22,6 +22,9 @@ export const theme = createTheme({
       greenLight: {
         main: "rgba(219, 248, 239, 1)",
       },
+      grey: {
+        main: "rgba(94, 119, 147, 1)",
+      },
       accent: {
         main: "rgba(0, 44, 251, 1)",
       },
@@ -30,6 +33,9 @@ export const theme = createTheme({
       },
       yellow: {
         main: "rgba(255, 213, 0, 1)",
+      },
+      blue: {
+        main: "rgba(0, 95, 248, 1)",
       },
       text: {
         main: "rgba(18, 41, 69, 1)",

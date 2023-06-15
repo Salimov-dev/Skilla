@@ -32,7 +32,7 @@ const DropdownProfile = () => {
             <KeyboardControlKeyOutlinedIcon
               sx={{
                 color: theme.palette.UI.accent.main,
-                width: "20px",
+                width: "24px",
                 paddingTop: "5px",
               }}
             />

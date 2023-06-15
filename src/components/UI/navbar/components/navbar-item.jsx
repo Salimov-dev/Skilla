@@ -2,6 +2,7 @@ import React from "react";
 import { theme } from "../../../../theme";
 import { styled, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-scroll";
 
 const Li = styled(`li`)({
   height: "52px",

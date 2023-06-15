@@ -44,14 +44,15 @@ axios.interceptors.request.use(
 
 export const loadCallsList = () => async (dispatch) => {
   const getCallsEndPoint = "https://api.skilla.ru/mango/getList";
-  const dateStart = "2023-06-09";
-  const dateEnd = "2023-06-12";
-  const inOut = "";
+  const dateStart = "2023-06-04";
+  const dateEnd = "2023-06-06";
+  const inOut = " ";
 
   dispatch(callsListRequested);
   try {
     const data = await axios.post(
-      `${getCallsEndPoint}?date_start=${dateStart}&date_end=${dateEnd}&in_out=${inOut}`
+      // `${getCallsEndPoint}?date_start=${dateStart}&date_end=${dateEnd}&in_out=${inOut}`
+      `${getCallsEndPoint}?date_start=${dateStart}&date_end=${dateEnd}`
     );
     dispatch(callsListReceived(data.data.results));
   } catch (error) {

@@ -9,10 +9,17 @@ import AnaliticsBlock from "./components/analitics-block";
 
 const HeaderStyled = styled(Box)`
   height: 64px;
-  padding: 0 120px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+`;
+
+const Container = styled(Box)`
+  height: 64px;
+  width: 1440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Header = () => {
@@ -20,10 +27,12 @@ const Header = () => {
 
   return (
     <HeaderStyled sx={{ backgroundColor: theme.palette.header.background }}>
-      <HeaderDateNow dateNow={dateNow} />
-      <AnaliticsBlock />
-      <DropdownCompany />
-      <DropdownProfile />
+      <Container>
+        <HeaderDateNow dateNow={dateNow} />
+        <AnaliticsBlock />
+        <DropdownCompany />
+        <DropdownProfile />
+      </Container>
     </HeaderStyled>
   );
 };
