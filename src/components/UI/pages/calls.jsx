@@ -104,7 +104,7 @@ const CallsPage = () => {
             <Box sx={{ height: "50px" }}>Баланс и выбор дат</Box>
 
             <SearchAndFilters>
-              <Search onSearchQuery={setSearchQuery} />
+              <Search searchQuery={searchQuery} onSearchQuery={setSearchQuery} />
               <Box>
                 <Dropdown
                   options={optionsCalls}
