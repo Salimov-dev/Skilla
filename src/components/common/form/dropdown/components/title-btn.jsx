@@ -1,34 +1,55 @@
-import { Typography } from "@mui/material";
 import React from "react";
+import { Button, Typography } from "@mui/material";
+import { theme } from "../../../../../theme";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import KeyboardControlKeyOutlinedIcon from "@mui/icons-material/KeyboardControlKeyOutlined";
 
-const TitleButton = () => {
+const TitleButton = ({ open, currentTitle, sortedOptionsArray, onClick }) => {
   return (
-    <Typography
-      noWrap
-      onClick={onClearFilters}
+    <Button
+      id="basic-menu"
+      aria-controls={open ? "basic-menu" : undefined}
+      aria-haspopup="true"
+      aria-expanded={open ? "true" : undefined}
+      onClick={(e) => onClick(e)}
       sx={{
-        display: "flex",
-        alignItems: "center",
-        color: theme.palette.UI.textSecondary.main,
-        marginRight: "50px",
-        cursor: "pointer",
-        "&:hover": {
-          color: theme.palette.UI.accent.main,
-        },
-        "&:hover > svg": {
-          color: theme.palette.UI.accent.main,
-        },
+        textTransform: "none",
+        color: open
+          ? theme.palette.UI.text.main
+          : theme.palette.UI.textSecondary.main,
+        "&:hover": { color: theme.palette.UI.accent.main },
+        "&:hover > svg": { color: theme.palette.UI.accent.main },
       }}
     >
-      Сбросить фильтры
-      <ClearOutlinedIcon
+      <Typography
         sx={{
-          width: "18px",
-          marginLeft: "8px",
-          color: theme.palette.UI.icon.main,
+          color: currentTitle !== undefined ? theme.palette.UI.accent.main : "",
         }}
-      />
-    </Typography>
+      >
+        {currentTitle !== undefined
+          ? currentTitle
+          : sortedOptionsArray[0].label}
+      </Typography>
+
+      {open ? (
+        <KeyboardControlKeyOutlinedIcon
+          sx={{
+            color: theme.palette.UI.accent.main,
+            width: "24px",
+            paddingTop: "4px",
+            marginLeft: "8px",
+          }}
+        />
+      ) : (
+        <KeyboardArrowDownOutlinedIcon
+          sx={{
+            color: theme.palette.UI.icon.main,
+            width: "24px",
+            marginLeft: "8px",
+          }}
+        />
+      )}
+    </Button>
   );
 };
 

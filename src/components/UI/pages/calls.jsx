@@ -39,16 +39,13 @@ const CallsPage = () => {
   const calls = useSelector(getCallsList());
   const [filterParams, setFilterParams] = useState({
     inOut: "",
-    text: "213",
-    text2: "gf3",
   });
   // console.log("calls", calls);
-  console.log("filterParams", filterParams);
+  // console.log("filterParams", filterParams);
 
   const handleClearFilters = () => {
     setFilterParams("");
-    // const copyData = {}
-    // for (const key in da)
+
   };
 
   const searchedCalls = useMemo(() => {
@@ -67,8 +64,6 @@ const CallsPage = () => {
       return searchedCalls;
     }
   };
-
-  // console.log("filteredCalls", filteredCalls());
 
   const handleChange = (target) => {
     setFilterParams((prevState) => ({
