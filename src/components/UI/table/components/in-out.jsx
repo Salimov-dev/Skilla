@@ -8,9 +8,9 @@ const InOut = ({ status }) => {
   return (
     <Box>
       {status ? (
-        <ArrowOutwardOutlinedIcon sx={{ color: theme.palette.UI.green.main }} />
-      ) : (
         <CallReceivedOutlinedIcon sx={{ color: theme.palette.UI.blue.main }} />
+      ) : (
+        <ArrowOutwardOutlinedIcon sx={{ color: theme.palette.UI.green.main }} />
       )}
     </Box>
   );

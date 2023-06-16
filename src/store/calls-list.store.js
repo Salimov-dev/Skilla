@@ -52,7 +52,22 @@ export const loadCallsList = () => async (dispatch) => {
     const data = await axios.post(
       `${getCallsEndPoint}?date_start=${dateStart}&date_end=${dateEnd}`
     );
-    dispatch(callsListReceived(data.data.results));
+
+    const random = () => {
+      let rand = 1 - 0.5 + Math.random() * (2 - 0 + 1);
+      return Math.round(rand);
+    };
+    const randomGrade = (time) => {
+      return time === 0 ? 0 : random();
+    };
+
+    let result = data.data.results;
+
+    for (let key of result) {
+      key.grade = randomGrade(key.time);
+    }
+
+    dispatch(callsListReceived(result));
   } catch (error) {
     dispatch(callsListFailed(error));
   }

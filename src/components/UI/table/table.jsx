@@ -19,14 +19,6 @@ const CallsListTable = ({ calls }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const random = () => {
-    let rand = 1 - 0.5 + Math.random() * (2 - 0 + 1);
-    return Math.round(rand);
-  };
-  const randomGrade = (time) => {
-    return time === 0 ? 0 : random();
-  };
-
   const columns = [
     {
       field: "in_out",
@@ -75,18 +67,18 @@ const CallsListTable = ({ calls }) => {
       },
     },
     {
-      field: "is_skilla",
+      field: "grade",
       headerName: "Оценка",
       width: 150,
       sortable: false,
-      renderCell: ({ row: { time } }) => {
+      renderCell: ({ row: { grade } }) => {
         return (
           <Box className="grade">
-            {randomGrade(time) === 3 ? (
+            {grade === 3 ? (
               <GreatSVG />
-            ) : randomGrade(time) === 2 ? (
+            ) : grade === 2 ? (
               <FineSVG />
-            ) : randomGrade(time) === 1 ? (
+            ) : grade === 1 ? (
               <BadlySVG />
             ) : (
               ""

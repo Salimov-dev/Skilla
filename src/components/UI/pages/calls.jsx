@@ -116,7 +116,6 @@ const CallsPage = () => {
                 />
               </Box>
             </SearchAndFilters>
-
             <CallsListTable calls={filteredCalls()} />
           </Container>
         </MainStyled>
