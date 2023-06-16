@@ -18,7 +18,6 @@ const Search = ({ onSearchQuery }) => {
         sx={{ ml: 1, flex: 1, fontSize: 14 }}
         placeholder="Поиск по звонкам"
         inputProps={{ "aria-label": "search google maps" }}
-        color="green"
         onChange={(e) => onSearchQuery(e.target.value)}
       />
     </SearchStyled>

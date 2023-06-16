@@ -7,6 +7,7 @@ import CallsListTable from "../table/table";
 import { useSelector } from "react-redux";
 import { getCallsList } from "../../../store/calls-list.store";
 import Search from "../search/search";
+import Dropdown from "../../common/form/dropdown/dropdown";
 // import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 const Component = styled(Box)`
@@ -36,10 +37,66 @@ const SearchAndFilters = styled(Box)`
 const CallsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const calls = useSelector(getCallsList());
+  const [filterParams, setFilterParams] = useState({
+    inOut: "",
+    text: "213",
+    text2: "gf3",
+  });
+  // console.log("calls", calls);
+  console.log("filterParams", filterParams);
+
+  const handleClearFilters = () => {
+    setFilterParams("");
+    // const copyData = {}
+    // for (const key in da)
+  };
 
   const searchedCalls = useMemo(() => {
-    return calls.filter((call) => call.to_number.includes(searchQuery));
+    return calls.filter((call) =>
+      call.to_number.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   }, [searchQuery, calls]);
+
+  const filteredCalls = () => {
+    if (typeof filterParams.inOut === "number") {
+      const result = searchedCalls.filter(
+        (call) => call.in_out === filterParams.inOut
+      );
+      return result;
+    } else {
+      return searchedCalls;
+    }
+  };
+
+  // console.log("filteredCalls", filteredCalls());
+
+  const handleChange = (target) => {
+    setFilterParams((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
+  };
+
+  const optionsCalls = [
+    {
+      id: 1,
+      label: "Все звонки",
+      name: "inOut",
+      inOut: "-1",
+    },
+    {
+      id: 2,
+      label: "Входящие звонки",
+      name: "inOut",
+      inOut: "1",
+    },
+    {
+      id: 3,
+      label: "Исходящие звонки",
+      name: "inOut",
+      inOut: "0",
+    },
+  ];
 
   return (
     <Component sx={{ backgroundColor: theme.palette.body.background }}>
@@ -53,10 +110,19 @@ const CallsPage = () => {
 
             <SearchAndFilters>
               <Search onSearchQuery={setSearchQuery} />
-              <Box>Sorting</Box>
+              <Box>
+                <Dropdown
+                  options={optionsCalls}
+                  onChange={handleChange}
+                  name="inOut"
+                  currentValue={filterParams.inOut}
+                  defaultLabel="Звонки"
+                  onClearFilters={handleClearFilters}
+                />
+              </Box>
             </SearchAndFilters>
 
-            <CallsListTable calls={searchedCalls} />
+            <CallsListTable calls={filteredCalls()} />
           </Container>
         </MainStyled>
       </Content>

@@ -102,9 +102,7 @@ const CallsListTable = ({ calls }) => {
       align: "right",
       flex: 1,
       sortable: false,
-      // position: 'relative',
       renderCell: ({ row: { time, id } }) => {
-        // if (hoveredRow !== id && time) {
         if (hoveredRow === id && time) {
           return <AudioPlayer time={time} />;
         } else return <DurationAudio time={time} />;
