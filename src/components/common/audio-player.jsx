@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { Box, styled } from "@mui/material";
 import dayjs from "dayjs";
 // UI
-import DurationAudio from "../UI/table/components/duraion-audio";
+import DurationAudioInSeconds from "../UI/table/components/duraion-audio";
 // icons
 import { AudioPlaySVG, AudioStopSVG } from "../../mockData/svg-storage";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -17,12 +17,12 @@ const AudioStyled = styled(Box)`
   height: 48px;
   border-radius: 48px;
   background-color: #eaf0fa;
-  padding: 0 20px;
+  padding: 0 22px;
   color: #122945;
   display: flex;
   align-items: center;
   justify-content: start,
-  position: relative;
+  position: absolute;
   gap: 10px
 `;
 
@@ -57,19 +57,6 @@ const AudioInput = styled(`input`)({
   width: "55%",
   marginRight: "10px",
 });
-
-const AudioLProgress = styled(Box)`
-  width: 164px;
-  height: 4px;
-  border-radius: 50px;
-  margin: 0 12px 0 8px;
-  &::-webkit-progress-bar {
-    background-color: #adbfdf;
-  }
-  &::-webkit-progress-value {
-    background-color: #002cfb;
-  }
-`;
 
 const AudioPlayer = ({ time }) => {
   const [isPlay, setIsplay] = useState(false);
@@ -108,7 +95,7 @@ const AudioPlayer = ({ time }) => {
         onEnded={endHandler}
       ></audio>
 
-      <AudioTime>{duration || <DurationAudio time={time} />}</AudioTime>
+      <AudioTime>{duration || <DurationAudioInSeconds time={time} />}</AudioTime>
 
       {isPlay ? (
         <AudioStop onClick={playHandler}>

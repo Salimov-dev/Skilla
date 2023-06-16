@@ -16,7 +16,7 @@ const Content = styled(Box)`
 `;
 
 const Container = styled(Box)`
-  minWidth: 1440px;
+  minwidth: 1440px;
   display: flex;
   flex-direction: column;
 `;
@@ -27,8 +27,8 @@ const MainStyled = styled(Box)`
 `;
 
 const CallsPage = () => {
-
-    const calls = useSelector(getCallsList());
+  const calls = useSelector(getCallsList());
+  // console.log("calls", calls);
 
   return (
     <Component sx={{ backgroundColor: theme.palette.body.background }}>
@@ -40,10 +40,9 @@ const CallsPage = () => {
           <Container>
             <Box>Баланс и выбор дат</Box>
             <Box>Поиск и фильтры</Box>
-            <CallsListTable calls={calls}/>
+            <CallsListTable calls={calls} />
           </Container>
         </MainStyled>
-
       </Content>
     </Component>
   );

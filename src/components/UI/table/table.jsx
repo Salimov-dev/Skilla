@@ -13,10 +13,20 @@ import DurationAudio from "./components/duraion-audio";
 import AudioPlayer from "../../common/audio-player";
 // other
 import { theme } from "../../../theme";
+import { BadlySVG, FineSVG, GreatSVG } from "../../../mockData/svg-storage";
 
 const CallsListTable = ({ calls }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
+
+  const random = () => {
+    let rand = 1 - 0.5 + Math.random() * (2 - 0 + 1);
+    return Math.round(rand);
+  };
+  const randomGrade = (time) =>{
+    
+    return time === 0 ? 0 : random();
+  } 
 
   const columns = [
     {
@@ -70,8 +80,20 @@ const CallsListTable = ({ calls }) => {
       headerName: "Оценка",
       width: 150,
       sortable: false,
-      renderCell: ({ row: { is_skilla } }) => {
-        return <Typography>Оценка</Typography>;
+      renderCell: ({ row: { is_skilla, time } }) => {
+        return (
+          <Box className="grade">
+            {randomGrade(time) === 3 ? (
+              <GreatSVG />
+            ) : randomGrade(time) === 2 ? (
+              <FineSVG />
+            ) : randomGrade(time) === 1 ? (
+              <BadlySVG />
+            ) : (
+              ""
+            )}
+          </Box>
+        );
       },
     },
     {
@@ -81,7 +103,9 @@ const CallsListTable = ({ calls }) => {
       align: "right",
       flex: 1,
       sortable: false,
+      // position: 'relative',
       renderCell: ({ row: { time, id } }) => {
+        // if (hoveredRow !== id && time) {
         if (hoveredRow === id && time) {
           return <AudioPlayer time={time} />;
         } else return <DurationAudio time={time} />;
@@ -111,7 +135,7 @@ const CallsListTable = ({ calls }) => {
           color: theme.palette.UI.textHeader.main,
         },
         "& .MuiDataGrid-columnHeader:last-child": {
-          paddingRight: "48px",
+          paddingRight: "38px",
         },
         "& .MuiDataGrid-row:hover": {
           backgroundColor: theme.palette.table.hover,
@@ -121,7 +145,7 @@ const CallsListTable = ({ calls }) => {
           borderColor: theme.palette.table.row,
         },
         "& .MuiDataGrid-cell:last-child": {
-          paddingRight: "40px",
+          paddingRight: "30px",
         },
         "& .MuiDataGrid-root .MuiDataGrid-cell:focus": {
           outline: "none",
@@ -146,6 +170,7 @@ const CallsListTable = ({ calls }) => {
         disableColumnMenu
         checkboxSelection
         hideFooter
+        disableRowSelectionOnClick
         rows={calls}
         rowHeight={65}
         columns={columns}

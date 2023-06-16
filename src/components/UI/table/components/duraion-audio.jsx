@@ -2,7 +2,7 @@ import React from "react";
 import { Typography } from "@mui/material";
 import { convertToTimeString } from "../../../../utils/convert-to-time-string";
 
-const DurationAudio = ({ time }) => {
+const DurationAudioInSeconds = ({ time }) => {
   return (
     <Typography
       sx={{
@@ -14,4 +14,4 @@ const DurationAudio = ({ time }) => {
   );
 };
 
-export default DurationAudio;
+export default DurationAudioInSeconds;
