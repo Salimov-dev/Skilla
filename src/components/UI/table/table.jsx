@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 // libraries
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Typography, styled } from "@mui/material";
+import { Box } from "@mui/material";
 // utils
 import { timeOfCallsTable } from "../../../utils/time-of-calls-table";
 // components
@@ -23,10 +23,9 @@ const CallsListTable = ({ calls }) => {
     let rand = 1 - 0.5 + Math.random() * (2 - 0 + 1);
     return Math.round(rand);
   };
-  const randomGrade = (time) =>{
-    
+  const randomGrade = (time) => {
     return time === 0 ? 0 : random();
-  } 
+  };
 
   const columns = [
     {
@@ -80,7 +79,7 @@ const CallsListTable = ({ calls }) => {
       headerName: "Оценка",
       width: 150,
       sortable: false,
-      renderCell: ({ row: { is_skilla, time } }) => {
+      renderCell: ({ row: { time } }) => {
         return (
           <Box className="grade">
             {randomGrade(time) === 3 ? (
