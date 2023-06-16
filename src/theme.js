@@ -68,9 +68,9 @@ export const theme = createTheme({
       },
     },
     table: {
-      hover: {main: "rgba(212, 223, 243, 0.17)"},
-      rowBottomBorder: {main: "rgba(234, 240, 250, 1)"},
-    }
+      hover: "rgba(212, 223, 243, 0.17)",
+      row: "rgba(234, 240, 250, 1)",
+    },
   },
   typography: {
     allVariants: {

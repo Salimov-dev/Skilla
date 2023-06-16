@@ -16,7 +16,7 @@ const Content = styled(Box)`
 `;
 
 const Container = styled(Box)`
-  minwidth: 1440px;
+  minWidth: 1440px;
   display: flex;
   flex-direction: column;
 `;

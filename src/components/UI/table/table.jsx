@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 // libraries
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 // utils
 import { timeOfCallsTable } from "../../../utils/time-of-calls-table";
-// other
-import { theme } from "../../../theme";
+// components
 import InOut from "./components/in-out";
 import PersonAvatar from "./components/avatar";
 import FromSite from "./components/from-site";
 import Source from "./components/source";
 import DurationAudio from "./components/duraion-audio";
+import AudioPlayer from "../../common/audio-player";
+// other
+import { theme } from "../../../theme";
 
 const CallsListTable = ({ calls }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
@@ -78,11 +80,10 @@ const CallsListTable = ({ calls }) => {
       headerAlign: "right",
       align: "right",
       flex: 1,
-      padding: "24px",
       sortable: false,
       renderCell: ({ row: { time, id } }) => {
-        if (hoveredRow === id) {
-          return <Box>Hello audio!</Box>;
+        if (hoveredRow === id && time) {
+          return <AudioPlayer time={time} />;
         } else return <DurationAudio time={time} />;
       },
     },
@@ -110,14 +111,17 @@ const CallsListTable = ({ calls }) => {
           color: theme.palette.UI.textHeader.main,
         },
         "& .MuiDataGrid-columnHeader:last-child": {
-          paddingRight: "14px",
+          paddingRight: "48px",
         },
         "& .MuiDataGrid-row:hover": {
-          backgroundColor: theme.palette.table.hover.main,
+          backgroundColor: theme.palette.table.hover,
           cursor: "pointer",
         },
         "& .MuiDataGrid-cell": {
-          borderColor: theme.palette.table.rowBottomBorder.main,
+          borderColor: theme.palette.table.row,
+        },
+        "& .MuiDataGrid-cell:last-child": {
+          paddingRight: "40px",
         },
         "& .MuiDataGrid-root .MuiDataGrid-cell:focus": {
           outline: "none",
@@ -126,7 +130,7 @@ const CallsListTable = ({ calls }) => {
           outline: "none !important",
         },
         "& .MuiDataGrid-columnHeaders": {
-          borderColor: theme.palette.table.rowBottomBorder.main,
+          borderColor: theme.palette.table.row,
         },
         "& .MuiCheckbox-root": {
           color: !selectedRows.length
