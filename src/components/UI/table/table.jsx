@@ -14,6 +14,7 @@ import AudioPlayer from "../../common/audio-player";
 // other
 import { theme } from "../../../theme";
 import { BadlySVG, FineSVG, GreatSVG } from "../../../data/svg-storage";
+import dayjs from "dayjs";
 
 const CallsListTable = ({ calls }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
@@ -101,6 +102,20 @@ const CallsListTable = ({ calls }) => {
       },
     },
   ];
+
+  const transformDate = (date) => {
+    return dayjs(date).format("YYYY-MM-DD");
+  };
+
+  const dateToday = dayjs().format("YYYY-MM-DD");
+  const callsArrayToday = calls.filter(
+    (call) => transformDate(call.date) === dateToday
+  );
+
+  const dateYesterday = dayjs().add(-1, "day").format("YYYY-MM-DD");
+  const callsArrayYesterday = calls.filter(
+    (call) => transformDate(call.date) === dateYesterday
+  );
 
   const onMouseEnterRow = (event) => {
     const id = Number(event.currentTarget.getAttribute("data-id"));

@@ -43,6 +43,7 @@ const CallsPage = () => {
   const isCallsLoading = useSelector(getCallsStatus());
   const inputSearchField = useRef(null);
   let editedSearchQuery = searchQuery.replace(/[^\d]/g, "");
+  // console.log("calls", calls);
 
   const searchedCalls = useMemo(() => {
     return calls.filter((call) =>
