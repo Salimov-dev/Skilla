@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // libraries
 import { DataGrid } from "@mui/x-data-grid";
-import { Badge, Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 // utils
 import { timeOfCallsTable } from "../../../utils/time-of-calls-table";
 // components
@@ -14,11 +14,20 @@ import AudioPlayer from "../../common/audio-player";
 // other
 import { theme } from "../../../theme";
 import { BadlySVG, FineSVG, GreatSVG } from "../../../data/svg-storage";
-import dayjs from "dayjs";
+import CallsUndefined from "./components/calls-undefined";
+import YesterdayTableTitle from "./components/yesterday-table-title";
+import useCallsLength from "../../../hooks/use-calls-length";
 
 const CallsListTable = ({ calls }) => {
+
   const [hoveredRow, setHoveredRow] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
+  const {
+    callsArrayToday,
+    callsTodayLength,
+    callsArrayYesterday,
+    callsYesterdayLength,
+  } = useCallsLength(calls);
 
   const columns = [
     {
@@ -103,22 +112,6 @@ const CallsListTable = ({ calls }) => {
     },
   ];
 
-  const transformDate = (date) => {
-    return dayjs(date).format("YYYY-MM-DD");
-  };
-
-  const dateToday = dayjs().format("YYYY-MM-DD");
-  const callsArrayToday = calls.filter(
-    (call) => transformDate(call.date) === dateToday
-  );
-  const callsTodayLength = callsArrayToday.length;
-
-  const dateYesterday = dayjs().add(-1, "day").format("YYYY-MM-DD");
-  const callsArrayYesterday = calls.filter(
-    (call) => transformDate(call.date) === dateYesterday
-  );
-  const callsYesterdayLength = callsArrayYesterday.length;
-
   const onMouseEnterRow = (event) => {
     const id = Number(event.currentTarget.getAttribute("data-id"));
     setHoveredRow(id);
@@ -128,114 +121,60 @@ const CallsListTable = ({ calls }) => {
     setHoveredRow(null);
   };
 
-  return (
-    <Box
-      sx={{
-        backgroundColor: "white",
-        boxShadow: "0px 4px 5px #E9EDF3",
-        borderRadius: "8px",
-        "& .MuiDataGrid-root": {
-          border: "none",
-        },
-        "& .MuiDataGrid-columnHeader": {
-          color: theme.palette.UI.textHeader.main,
-        },
-        "& .MuiDataGrid-columnHeader:last-child": {
-          paddingRight: "38px",
-        },
-        "& .MuiDataGrid-row:hover": {
-          backgroundColor: theme.palette.table.hover,
-          cursor: "pointer",
-        },
-        "& .MuiDataGrid-cell": {
-          borderColor: theme.palette.table.row,
-        },
-        "& .MuiDataGrid-cell:last-child": {
-          paddingRight: "30px",
-        },
-        "& .MuiDataGrid-root .MuiDataGrid-cell:focus": {
-          outline: "none",
-        },
-        "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
-          outline: "none !important",
-        },
-        "& .MuiDataGrid-columnHeaders": {
-          borderColor: theme.palette.table.row,
-        },
-        "& .MuiCheckbox-root": {
-          color: !selectedRows.length
-            ? theme.palette.UI.icon.main
-            : theme.palette.UI.grey.main,
-        },
-        "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
-          display: "none",
-        },
-      }}
-    >
-      <>
-        {callsTodayLength ? (
-          <DataGrid
-            disableColumnMenu
-            checkboxSelection
-            hideFooter
-            disableRowSelectionOnClick
-            rows={callsArrayToday}
-            rowHeight={65}
-            columns={columns}
-            sx={{
-              padding: "6px 0px",
-              "&>.MuiDataGrid-main": {
-                "& div div div div:last-of-type >.MuiDataGrid-cell": {
-                  borderBottom: "none",
-                },
-              },
-            }}
-            onRowSelectionModelChange={(ids) => {
-              setSelectedRows(ids);
-            }}
-            slotProps={{
-              row: {
-                onMouseEnter: onMouseEnterRow,
-                onMouseLeave: onMouseLeaveRow,
-              },
-            }}
-          />
-        ) : (
-          <Box sx={{ padding: "30px 0 30px 14px" }}>
-            <Typography variant="h5">
-              Звонков за сегодня не обнаружено
-            </Typography>
-          </Box>
-        )}
-
-        {callsYesterdayLength ? (
-          <>
-            <Box
-              display="flex"
-              mt="50px"
-              pl="15px"
-              pb="17px"
-              gap="4px"
-              sx={{
-                borderBottom:
-                  callsTodayLength && `1px solid ${theme.palette.table.row}`,
-              }}
-            >
-              <Typography>вчера</Typography>
-              <Typography
-                fontSize="12px"
-                sx={{ color: theme.palette.UI.textHeader.main }}
-              >
-                {callsYesterdayLength}
-              </Typography>
-            </Box>
-
+  {
+    return calls.length ? (
+      <Box
+        sx={{
+          backgroundColor: "white",
+          boxShadow: "0px 4px 5px #E9EDF3",
+          borderRadius: "8px",
+          "& .MuiDataGrid-root": {
+            border: "none",
+          },
+          "& .MuiDataGrid-columnHeader": {
+            color: theme.palette.UI.textHeader.main,
+          },
+          "& .MuiDataGrid-columnHeader:last-child": {
+            paddingRight: "38px",
+          },
+          "& .MuiDataGrid-row:hover": {
+            backgroundColor: theme.palette.table.hover,
+            cursor: "pointer",
+          },
+          "& .MuiDataGrid-cell": {
+            borderColor: theme.palette.table.row,
+          },
+          "& .MuiDataGrid-cell:last-child": {
+            paddingRight: "30px",
+          },
+          "& .MuiDataGrid-root .MuiDataGrid-cell:focus": {
+            outline: "none",
+          },
+          "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+            outline: "none !important",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            borderColor: theme.palette.table.row,
+          },
+          "& .MuiCheckbox-root": {
+            color: !selectedRows.length
+              ? theme.palette.UI.icon.main
+              : theme.palette.UI.grey.main,
+          },
+          "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
+            display: "none",
+          },
+        }}
+      >
+        <>
+          {callsTodayLength || calls ? (
             <DataGrid
               disableColumnMenu
               checkboxSelection
+              autoHeight
               hideFooter
               disableRowSelectionOnClick
-              rows={callsArrayYesterday}
+              rows={callsTodayLength ? callsArrayToday : calls}
               rowHeight={65}
               columns={columns}
               sx={{
@@ -244,14 +183,6 @@ const CallsListTable = ({ calls }) => {
                   "& div div div div:last-of-type >.MuiDataGrid-cell": {
                     borderBottom: "none",
                   },
-                  "& div div div div:first-of-type >.MuiDataGrid-cell": {
-                    borderTop: "green",
-                  },
-                },
-
-                "& .MuiDataGrid-columnHeaders": {
-                  display: callsTodayLength && "none",
-                  borderColor: theme.palette.table.row,
                 },
               }}
               onRowSelectionModelChange={(ids) => {
@@ -264,11 +195,56 @@ const CallsListTable = ({ calls }) => {
                 },
               }}
             />
-          </>
-        ) : null}
-      </>
-    </Box>
-  );
+          ) : (
+            <CallsUndefined />
+          )}
+
+          {callsYesterdayLength ? (
+            <Box>
+              <YesterdayTableTitle length={callsYesterdayLength} />
+              <DataGrid
+                disableColumnMenu
+                autoHeight
+                checkboxSelection
+                hideFooter
+                disableRowSelectionOnClick
+                rows={callsArrayYesterday}
+                rowHeight={65}
+                columns={columns}
+                sx={{
+                  padding: "6px 0px",
+                  "&>.MuiDataGrid-main": {
+                    "& div div div div:last-of-type >.MuiDataGrid-cell": {
+                      borderBottom: "none",
+                    },
+                    "& div div div div:first-of-type >.MuiDataGrid-cell": {
+                      borderTop: "green",
+                    },
+                  },
+
+                  "& .MuiDataGrid-columnHeaders": {
+                    display: callsTodayLength && "none",
+                    borderColor: theme.palette.table.row,
+                  },
+                }}
+                onRowSelectionModelChange={(ids) => {
+                  setSelectedRows(ids);
+                }}
+                slotProps={{
+                  row: {
+                    onMouseEnter: onMouseEnterRow,
+                    onMouseLeave: onMouseLeaveRow,
+                  },
+                }}
+              />
+            </Box>
+          ) : null}
+        </>
+      </Box>
+    ) : (
+      <CallsUndefined />
+    );
+  }
 };
 
 export default CallsListTable;

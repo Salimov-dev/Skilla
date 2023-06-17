@@ -9,6 +9,8 @@ import { getCallsList, getCallsStatus } from "../../../store/calls-list.store";
 import Search from "../search/search";
 import Dropdown from "../../common/form/dropdown/dropdown";
 import Loader from "../../common/loader";
+import CallsUndefined from "../table/components/calls-undefined";
+import FiltersSearchBar from "../main/components/filters-seach-bar";
 
 const Component = styled(Box)`
   display: flex;
@@ -107,8 +109,14 @@ const CallsPage = () => {
           <MainStyled>
             <Container>
               <Box sx={{ height: "50px" }}>Баланс и выбор дат</Box>
-
-              <SearchAndFilters>
+              <FiltersSearchBar
+                refLink={inputSearchField}
+                filterParams={filterParams}
+                setFilterParams={setFilterParams}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+              />
+              {/* <SearchAndFilters>
                 <Search
                   searchQuery={editedSearchQuery}
                   onSearchQuery={setSearchQuery}
@@ -125,7 +133,8 @@ const CallsPage = () => {
                     onClearFilters={handleClearFilters}
                   />
                 </Box>
-              </SearchAndFilters>
+              </SearchAndFilters> */}
+
               <CallsListTable calls={filteredCalls()} />
             </Container>
           </MainStyled>
