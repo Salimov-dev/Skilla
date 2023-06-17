@@ -1,4 +1,3 @@
-import React from "react";
 import { theme } from "../../../../theme";
 import { Box, styled } from "@mui/material";
 import NavbarListItem from "./navbar-item";

@@ -1,9 +1,12 @@
 import AppLoader from "./hoc/app-loader";
+// libraries
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CallsPage from "./components/UI/pages/calls";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { theme } from "./theme";
+// components
+import CallsPage from "./components/UI/pages/calls";
 import EmptyPage from "./components/UI/pages/empty";
+// other
+import { theme } from "./theme";
 import ScrollToTop from "./utils/scroll-to-top";
 
 function App() {

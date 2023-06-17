@@ -1,6 +1,4 @@
 import { Box, LinearProgress, Typography } from "@mui/material";
-import React from "react";
-import { theme } from "../../../../theme";
 
 const WorkProgress = ({
   value,

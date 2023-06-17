@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, styled } from "@mui/material";
 import NavbarLogo from "./components/navbar-logo";
 import NavbarListItems from "./components/navbar-list";

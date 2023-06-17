@@ -1,5 +1,4 @@
 import { Menu, MenuItem } from "@mui/material";
-import React from "react";
 import { theme } from "../../../../../theme";
 
 const MenuDropdown = ({

@@ -1,4 +1,3 @@
-import React from "react";
 import Search from "../../search/search";
 import { Box, styled } from "@mui/material";
 import Dropdown from "../../../common/form/dropdown/dropdown";

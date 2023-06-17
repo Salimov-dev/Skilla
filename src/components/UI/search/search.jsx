@@ -1,4 +1,3 @@
-import React from "react";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { InputBase, styled, Box } from "@mui/material";
 import { theme } from "../../../theme";

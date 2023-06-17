@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React, { useState } from "react";
+import  { useState } from "react";
 import _ from "lodash";
 import TitleButton from "./components/title-btn";
 import ClearFiltersButton from "./components/clear-filters-btn";

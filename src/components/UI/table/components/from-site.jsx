@@ -1,5 +1,5 @@
-import React from "react";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+import { theme } from "../../../../theme";
 
 const FromSite = ({ site }) => {
   return site ? (

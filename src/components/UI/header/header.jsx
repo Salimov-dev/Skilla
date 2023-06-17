@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, styled } from "@mui/material";
 import { theme } from "../../../theme";
 import useLocalDate from "../../../hooks/use-local-date";

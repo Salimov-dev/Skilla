@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material";
 import logo from "../../../../assets/images/navBar/logo_skilla.svg";

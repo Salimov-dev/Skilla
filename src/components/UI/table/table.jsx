@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 // libraries
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 // utils
 import { timeOfCallsTable } from "../../../utils/time-of-calls-table";
 // components
@@ -19,7 +19,6 @@ import YesterdayTableTitle from "./components/yesterday-table-title";
 import useCallsLength from "../../../hooks/use-calls-length";
 
 const CallsListTable = ({ calls }) => {
-
   const [hoveredRow, setHoveredRow] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
   const {
@@ -217,13 +216,11 @@ const CallsListTable = ({ calls }) => {
                     "& div div div div:last-of-type >.MuiDataGrid-cell": {
                       borderBottom: "none",
                     },
-                    "& div div div div:first-of-type >.MuiDataGrid-cell": {
-                      borderTop: "green",
-                    },
                   },
 
                   "& .MuiDataGrid-columnHeaders": {
-                    display: callsTodayLength && "none",
+                    display:
+                      !callsYesterdayLength || (callsTodayLength && "none"),
                     borderColor: theme.palette.table.row,
                   },
                 }}

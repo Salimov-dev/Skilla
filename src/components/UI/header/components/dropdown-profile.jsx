@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Menu, Stack, Typography } from "@mui/material";
-import React from "react";
+import { useState } from "react";
 import { theme } from "../../../../theme";
 import profileAvatar from "../../../../assets/images/header/profile-avatar.png";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
@@ -7,7 +7,7 @@ import KeyboardControlKeyOutlinedIcon from "@mui/icons-material/KeyboardControlK
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 const DropdownProfile = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {

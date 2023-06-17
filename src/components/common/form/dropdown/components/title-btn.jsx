@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Typography } from "@mui/material";
 import { theme } from "../../../../../theme";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";

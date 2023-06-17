@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Button } from "@mui/material";
 import { theme } from "../../../../theme";
 import WorkProgress from "./work-progress";

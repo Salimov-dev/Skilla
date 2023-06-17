@@ -1,5 +1,4 @@
 import { Typography } from "@mui/material";
-import React from "react";
 import { theme } from "../../../../../theme";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { styled, Typography, Button } from "@mui/material";
 import { theme } from "../../../../theme";
 
