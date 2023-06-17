@@ -22,14 +22,14 @@ const Container = styled(Box)`
   justify-content: center;
 `;
 
-const Header = () => {
+const Header = ({onSearchFieldFocus}) => {
   const dateNow = useLocalDate();
 
   return (
     <HeaderStyled sx={{ backgroundColor: theme.palette.header.background }}>
       <Container>
         <HeaderDateNow dateNow={dateNow} />
-        <AnaliticsBlock />
+        <AnaliticsBlock onSearchFieldFocus={onSearchFieldFocus}/>
         <DropdownCompany />
         <DropdownProfile />
       </Container>

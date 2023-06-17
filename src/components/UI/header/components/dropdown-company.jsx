@@ -58,31 +58,11 @@ const DropdownCompany = ({ button }) => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <Box sx={{ padding: "20px 32px" }}>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
-                ИП Сидорова А.М.
-              </Typography>
-            </Box>
-
-            <Stack
-              sx={{
-                width: "368px",
-                color: theme.palette.UI.textSecondary.main,
-              }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <Typography>Предприятие</Typography>
-                <Typography
-                  sx={{
-                    padding: "3px",
-                    backgroundColor: theme.palette.UI.icon.main,
-                    borderRadius: "50%",
-                  }}
-                ></Typography>
-                <Typography>Санкт-Петербург</Typography>
-              </Box>
-            </Stack>
+          <Box sx={{ padding: "10px 20px", display: 'flex', flexDirection: "column", gap: '10px' }}>
+            <Typography sx={{color: theme.palette.UI.accent.main}}>Все организации</Typography>
+            <Typography sx={{color: theme.palette.UI.textHeader.main}}>ООО Грузчиков Сервис Запад</Typography>
+            <Typography sx={{color: theme.palette.UI.textHeader.main}}>ИП Митрофанов М.М.</Typography>
+            <Typography sx={{color: theme.palette.UI.textHeader.main}}>ИП Иванов М.М.</Typography>
           </Box>
         </Menu>
       </Box>

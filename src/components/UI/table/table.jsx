@@ -13,7 +13,7 @@ import DurationAudio from "./components/duraion-audio";
 import AudioPlayer from "../../common/audio-player";
 // other
 import { theme } from "../../../theme";
-import { BadlySVG, FineSVG, GreatSVG } from "../../../mockData/svg-storage";
+import { BadlySVG, FineSVG, GreatSVG } from "../../../data/svg-storage";
 
 const CallsListTable = ({ calls }) => {
   const [hoveredRow, setHoveredRow] = useState(null);

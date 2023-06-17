@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 // UI
 import DurationAudioInSeconds from "../UI/table/components/duraion-audio";
 // icons
-import { AudioPlaySVG, AudioStopSVG } from "../../mockData/svg-storage";
+import { AudioPlaySVG, AudioStopSVG } from "../../data/svg-storage";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import ClearIcon from "@mui/icons-material/Clear";
 // other
@@ -95,7 +95,9 @@ const AudioPlayer = ({ time }) => {
         onEnded={endHandler}
       ></audio>
 
-      <AudioTime>{duration || <DurationAudioInSeconds time={time} />}</AudioTime>
+      <AudioTime>
+        {duration || <DurationAudioInSeconds time={time} />}
+      </AudioTime>
 
       {isPlay ? (
         <AudioStop onClick={playHandler}>

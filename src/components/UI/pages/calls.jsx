@@ -1,14 +1,14 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Box, IconButton, InputBase, styled, Typography } from "@mui/material";
 import Navbar from "../navbar/navbar";
 import { theme } from "../../../theme";
 import Header from "../header/header";
 import CallsListTable from "../table/table";
 import { useSelector } from "react-redux";
-import { getCallsList } from "../../../store/calls-list.store";
+import { getCallsList, getCallsStatus } from "../../../store/calls-list.store";
 import Search from "../search/search";
 import Dropdown from "../../common/form/dropdown/dropdown";
-// import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import Loader from "../../common/loader";
 
 const Component = styled(Box)`
   display: flex;
@@ -36,21 +36,17 @@ const SearchAndFilters = styled(Box)`
 
 const CallsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const calls = useSelector(getCallsList());
   const [filterParams, setFilterParams] = useState({
     inOut: "",
   });
-  // console.log("calls", calls);
-  // console.log("filterParams", filterParams);
-
-  const handleClearFilters = () => {
-    setFilterParams("");
-
-  };
+  const calls = useSelector(getCallsList());
+  const isCallsLoading = useSelector(getCallsStatus());
+  const inputSearchField = useRef(null);
+  let editedSearchQuery = searchQuery.replace(/[^\d]/g, "");
 
   const searchedCalls = useMemo(() => {
     return calls.filter((call) =>
-      call.to_number.toLowerCase().includes(searchQuery.toLowerCase())
+      call.to_number.toLowerCase().includes(editedSearchQuery.toLowerCase())
     );
   }, [searchQuery, calls]);
 
@@ -63,6 +59,14 @@ const CallsPage = () => {
     } else {
       return searchedCalls;
     }
+  };
+
+  const handleSearchFieldFocus = () => {
+    inputSearchField.current.focus();
+  };
+
+  const handleClearFilters = () => {
+    setFilterParams("");
   };
 
   const handleChange = (target) => {
@@ -97,28 +101,36 @@ const CallsPage = () => {
     <Component sx={{ backgroundColor: theme.palette.body.background }}>
       <Navbar />
       <Content sx={{ paddingBottom: "546px" }}>
-        <Header />
+        <Header onSearchFieldFocus={handleSearchFieldFocus} />
+        {!isCallsLoading ? (
+          <MainStyled>
+            <Container>
+              <Box sx={{ height: "50px" }}>Баланс и выбор дат</Box>
 
-        <MainStyled>
-          <Container>
-            <Box sx={{ height: "50px" }}>Баланс и выбор дат</Box>
-
-            <SearchAndFilters>
-              <Search searchQuery={searchQuery} onSearchQuery={setSearchQuery} />
-              <Box>
-                <Dropdown
-                  options={optionsCalls}
-                  onChange={handleChange}
-                  name="inOut"
-                  currentValue={filterParams.inOut}
-                  defaultLabel="Звонки"
+              <SearchAndFilters>
+                <Search
+                  searchQuery={editedSearchQuery}
+                  onSearchQuery={setSearchQuery}
+                  refLink={inputSearchField}
                   onClearFilters={handleClearFilters}
                 />
-              </Box>
-            </SearchAndFilters>
-            <CallsListTable calls={filteredCalls()} />
-          </Container>
-        </MainStyled>
+                <Box>
+                  <Dropdown
+                    options={optionsCalls}
+                    onChange={handleChange}
+                    name="inOut"
+                    currentValue={filterParams.inOut}
+                    defaultLabel="Звонки"
+                    onClearFilters={handleClearFilters}
+                  />
+                </Box>
+              </SearchAndFilters>
+              <CallsListTable calls={filteredCalls()} />
+            </Container>
+          </MainStyled>
+        ) : (
+          <Loader />
+        )}
       </Content>
     </Component>
   );

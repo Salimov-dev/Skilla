@@ -1,10 +1,10 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { theme } from "../../../../theme";
 import WorkProgress from "./work-progress";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-const AnaliticsBlock = () => {
+const AnaliticsBlock = ({ onSearchFieldFocus }) => {
   return (
     <Box
       sx={{
@@ -40,7 +40,9 @@ const AnaliticsBlock = () => {
           progressColorBackground={theme.palette.linearProgress.background.main}
         />
       </Box>
-      <SearchOutlinedIcon sx={{ color: "#ADBFDF", cursor: "pointer" }} />
+      <Button onClick={onSearchFieldFocus}>
+        <SearchOutlinedIcon sx={{ color: "#ADBFDF", cursor: "pointer" }} />
+      </Button>
     </Box>
   );
 };

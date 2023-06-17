@@ -1,6 +1,6 @@
 import React from "react";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { InputBase, styled, Box, TextField, IconButton } from "@mui/material";
+import { InputBase, styled, Box } from "@mui/material";
 import { theme } from "../../../theme";
 
 const SearchStyled = styled(Box)`
@@ -9,7 +9,36 @@ const SearchStyled = styled(Box)`
   margin-bottom: 10px;
 `;
 
-const Search = ({ searchQuery, onSearchQuery }) => {
+const Search = ({ searchQuery, onSearchQuery, refLink, clearInput }) => {
+  const formatPhoneNumber = (value) => {
+    if (!value) return value;
+
+    let phoneNumber = value.replace(/[^\d]/g, "");
+    const phoneNumberLength = phoneNumber.length;
+
+    if (phoneNumber == 7) {
+      onSearchQuery("");
+    }
+
+    if (phoneNumberLength <= 1) {
+      return `+7 ${phoneNumber.replace("7", "")}`;
+    } else if (phoneNumberLength <= 4) {
+      return `+7 (${phoneNumber.slice(1)}`;
+    } else if (phoneNumberLength <= 7) {
+      return `+7 (${phoneNumber.slice(1, 4)}) ${phoneNumber.slice(4)}`;
+    } else if (phoneNumberLength <= 9) {
+      return `+7 (${phoneNumber.slice(1, 4)}) ${phoneNumber.slice(
+        4,
+        7
+      )}-${phoneNumber.slice(7)}`;
+    } else {
+      return `+7 (${phoneNumber.slice(1, 4)}) ${phoneNumber.slice(
+        4,
+        7
+      )}-${phoneNumber.slice(7, 9)}-${phoneNumber.slice(9, 11)}`;
+    }
+  };
+
   return (
     <SearchStyled>
       <InputBase
@@ -50,6 +79,9 @@ const Search = ({ searchQuery, onSearchQuery }) => {
         placeholder="Поиск по звонкам"
         inputProps={{ "aria-label": "search google maps" }}
         onChange={(e) => onSearchQuery(e.target.value)}
+        value={formatPhoneNumber(searchQuery)}
+        inputRef={refLink}
+        inputProps={{ maxLength: 18 }}
       />
     </SearchStyled>
   );

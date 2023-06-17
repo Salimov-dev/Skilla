@@ -44,8 +44,8 @@ axios.interceptors.request.use(
 
 export const loadCallsList = () => async (dispatch) => {
   const getCallsEndPoint = "https://api.skilla.ru/mango/getList";
-  const dateStart = "2023-06-04";
-  const dateEnd = "2023-06-06";
+  const dateStart = "2023-06-16";
+  const dateEnd = "2023-06-17";
 
   dispatch(callsListRequested);
   try {
@@ -67,12 +67,15 @@ export const loadCallsList = () => async (dispatch) => {
       key.grade = randomGrade(key.time);
     }
 
-    dispatch(callsListReceived(result));
+    setTimeout(() => {
+      dispatch(callsListReceived(result));
+    }, 100);
   } catch (error) {
     dispatch(callsListFailed(error));
   }
 };
 
 export const getCallsList = () => (state) => state.calls.entities;
+export const getCallsStatus = () => (state) => state.calls.isLoading;
 
 export default callsListReducer;

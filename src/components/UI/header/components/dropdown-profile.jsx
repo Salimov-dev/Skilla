@@ -52,7 +52,7 @@ const DropdownProfile = () => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <Box sx={{ padding: "20px 32px" }}>
+          <Box sx={{ padding: "10px 20px" }}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
                 Упоров Кирилл
