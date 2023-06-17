@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // libraries
 import { DataGrid } from "@mui/x-data-grid";
-import { Box } from "@mui/material";
+import { Badge, Box, Typography } from "@mui/material";
 // utils
 import { timeOfCallsTable } from "../../../utils/time-of-calls-table";
 // components
@@ -111,11 +111,13 @@ const CallsListTable = ({ calls }) => {
   const callsArrayToday = calls.filter(
     (call) => transformDate(call.date) === dateToday
   );
+  const callsTodayLength = callsArrayToday.length;
 
   const dateYesterday = dayjs().add(-1, "day").format("YYYY-MM-DD");
   const callsArrayYesterday = calls.filter(
     (call) => transformDate(call.date) === dateYesterday
   );
+  const callsYesterdayLength = callsArrayYesterday.length;
 
   const onMouseEnterRow = (event) => {
     const id = Number(event.currentTarget.getAttribute("data-id"));
@@ -170,25 +172,101 @@ const CallsListTable = ({ calls }) => {
         },
       }}
     >
-      <DataGrid
-        disableColumnMenu
-        checkboxSelection
-        hideFooter
-        disableRowSelectionOnClick
-        rows={calls}
-        rowHeight={65}
-        columns={columns}
-        sx={{ padding: "6px 0px" }}
-        onRowSelectionModelChange={(ids) => {
-          setSelectedRows(ids);
-        }}
-        slotProps={{
-          row: {
-            onMouseEnter: onMouseEnterRow,
-            onMouseLeave: onMouseLeaveRow,
-          },
-        }}
-      />
+      <>
+        {callsTodayLength ? (
+          <DataGrid
+            disableColumnMenu
+            checkboxSelection
+            hideFooter
+            disableRowSelectionOnClick
+            rows={callsArrayToday}
+            rowHeight={65}
+            columns={columns}
+            sx={{
+              padding: "6px 0px",
+              "&>.MuiDataGrid-main": {
+                "& div div div div:last-of-type >.MuiDataGrid-cell": {
+                  borderBottom: "none",
+                },
+              },
+            }}
+            onRowSelectionModelChange={(ids) => {
+              setSelectedRows(ids);
+            }}
+            slotProps={{
+              row: {
+                onMouseEnter: onMouseEnterRow,
+                onMouseLeave: onMouseLeaveRow,
+              },
+            }}
+          />
+        ) : (
+          <Box sx={{ padding: "30px 0 30px 14px" }}>
+            <Typography variant="h5">
+              Звонков за сегодня не обнаружено
+            </Typography>
+          </Box>
+        )}
+
+        {callsYesterdayLength ? (
+          <>
+            <Box
+              display="flex"
+              mt="50px"
+              pl="15px"
+              pb="17px"
+              gap="4px"
+              sx={{
+                borderBottom:
+                  callsTodayLength && `1px solid ${theme.palette.table.row}`,
+              }}
+            >
+              <Typography>вчера</Typography>
+              <Typography
+                fontSize="12px"
+                sx={{ color: theme.palette.UI.textHeader.main }}
+              >
+                {callsYesterdayLength}
+              </Typography>
+            </Box>
+
+            <DataGrid
+              disableColumnMenu
+              checkboxSelection
+              hideFooter
+              disableRowSelectionOnClick
+              rows={callsArrayYesterday}
+              rowHeight={65}
+              columns={columns}
+              sx={{
+                padding: "6px 0px",
+                "&>.MuiDataGrid-main": {
+                  "& div div div div:last-of-type >.MuiDataGrid-cell": {
+                    borderBottom: "none",
+                  },
+                  "& div div div div:first-of-type >.MuiDataGrid-cell": {
+                    borderTop: "green",
+                  },
+                },
+
+                "& .MuiDataGrid-columnHeaders": {
+                  display: callsTodayLength && "none",
+                  borderColor: theme.palette.table.row,
+                },
+              }}
+              onRowSelectionModelChange={(ids) => {
+                setSelectedRows(ids);
+              }}
+              slotProps={{
+                row: {
+                  onMouseEnter: onMouseEnterRow,
+                  onMouseLeave: onMouseLeaveRow,
+                },
+              }}
+            />
+          </>
+        ) : null}
+      </>
     </Box>
   );
 };

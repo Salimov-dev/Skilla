@@ -73,9 +73,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    allVariants: {
-      fontSize: 15,
-      fontFamily: ["SF Pro Display", "sans-serif"].join(","),
-    },
+    fontSize: 13,
+    fontFamily: ["SF Pro Display", "sans-serif"].join(",")
   },
 });
