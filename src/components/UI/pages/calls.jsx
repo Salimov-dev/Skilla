@@ -7,7 +7,9 @@ import CallsListTable from "../table/table";
 import { useSelector } from "react-redux";
 import { getCallsList, getCallsStatus } from "../../../store/calls-list.store";
 import Loader from "../../common/loader";
-import FiltersSearchBar from "../main/components/filters-seach-bar";
+import FiltersSearchBar from "../main/components/search-and-filters";
+
+import Balance from "../balance/balance";
 
 const Component = styled(Box)`
   display: flex;
@@ -68,7 +70,17 @@ const CallsPage = () => {
         {!isCallsLoading ? (
           <MainStyled>
             <Container>
-              <Box sx={{ height: "50px" }}>Баланс и выбор дат</Box>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="end"
+                gap="50px"
+                sx={{ padding: "20px 0px" }}
+              >
+                <Balance />
+                <Box>menu</Box>
+              </Box>
+
               <FiltersSearchBar
                 refLink={inputSearchField}
                 filterParams={filterParams}
