@@ -1,6 +1,6 @@
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { InputBase, styled, Box } from "@mui/material";
-import { theme } from "../../../theme";
+import { theme } from "../../../../theme";
 
 const SearchStyled = styled(Box)`
   display: flex;

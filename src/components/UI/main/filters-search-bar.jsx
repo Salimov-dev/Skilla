@@ -1,6 +1,7 @@
-import Search from "../../search/search";
 import { Box, styled } from "@mui/material";
-import Dropdown from "../../../common/form/dropdown/dropdown";
+import Dropdown from "../../common/form/dropdown/dropdown";
+import Search from "./components/search";
+import ClearFiltersButton from "../../common/form/dropdown/components/clear-filters-btn";
 
 const SearchAndFilters = styled(Box)`
   display: flex;
@@ -25,6 +26,15 @@ const FiltersSearchBar = ({
     }));
   };
 
+  const isFilterParamsEmpty = (obj) => {
+    for (let key in obj) {
+      if (obj[key] !== "") {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const optionsCalls = [
     {
       id: 1,
@@ -45,6 +55,7 @@ const FiltersSearchBar = ({
       inOut: "0",
     },
   ];
+
   return (
     <SearchAndFilters>
       <Search
@@ -53,14 +64,17 @@ const FiltersSearchBar = ({
         refLink={refLink}
         onClearFilters={handleClearFilters}
       />
-      <Box>
+      <Box display="flex">
+        {!isFilterParamsEmpty(filterParams) && (
+          <ClearFiltersButton onClearFilters={handleClearFilters} />
+        )}
         <Dropdown
           options={optionsCalls}
           onChange={handleChange}
           name="inOut"
           currentValue={filterParams.inOut}
-          defaultLabel="Звонки"
           onClearFilters={handleClearFilters}
+          filterParamsItem="inOut"
         />
       </Box>
     </SearchAndFilters>

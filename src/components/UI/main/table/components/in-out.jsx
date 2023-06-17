@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { theme } from "../../../../theme";
+import { theme } from "../../../../../theme";
 import ArrowOutwardOutlinedIcon from "@mui/icons-material/ArrowOutwardOutlined";
 import CallReceivedOutlinedIcon from "@mui/icons-material/CallReceivedOutlined";
 

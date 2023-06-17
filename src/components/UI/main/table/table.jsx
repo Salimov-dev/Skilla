@@ -3,20 +3,20 @@ import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 // utils
-import { timeOfCallsTable } from "../../../utils/time-of-calls-table";
+import { timeOfCallsTable } from "../../../../utils/time-of-calls-table";
 // components
 import InOut from "./components/in-out";
 import PersonAvatar from "./components/avatar";
 import FromSite from "./components/from-site";
 import Source from "./components/source";
 import DurationAudio from "./components/duraion-audio";
-import AudioPlayer from "../../common/audio-player";
+import AudioPlayer from "../../../common/audio-player";
 // other
-import { theme } from "../../../theme";
-import { BadlySVG, FineSVG, GreatSVG } from "../../../data/svg-storage";
+import { theme } from "../../../../theme";
+import { BadlySVG, FineSVG, GreatSVG } from "../../../../data/svg-storage";
 import CallsUndefined from "./components/calls-undefined";
 import YesterdayTableTitle from "./components/yesterday-table-title";
-import useCallsLength from "../../../hooks/use-calls-length";
+import useCallsLength from "../../../../hooks/use-calls-length";
 
 const CallsListTable = ({ calls }) => {
   const [hoveredRow, setHoveredRow] = useState(null);

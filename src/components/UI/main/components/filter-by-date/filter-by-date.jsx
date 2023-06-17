@@ -1,10 +1,9 @@
 import { Box } from "@mui/material";
-import  { useState } from "react";
-import _ from "lodash";
-import TitleButton from "./components/title-btn";
+import { useState } from "react";
+import TitleButton from "../../../../common/form/dropdown/components/title-btn";
 import MenuDropdown from "./components/menu";
 
-const Dropdown = ({ options, onChange, currentValue, filterParamsItem }) => {
+const FilterByDate = ({ options, onChange, currentValue }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -17,13 +16,7 @@ const Dropdown = ({ options, onChange, currentValue, filterParamsItem }) => {
   };
 
   const handleChange = ({ target }) => {
-    let res = target.value;
-    if (target.value === -1) {
-      res = "";
-    } else {
-      res;
-    }
-    onChange({ name: target.id, value: res });
+    onChange({ name: target.id, value: target.value });
     setAnchorEl(null);
   };
 
@@ -35,8 +28,9 @@ const Dropdown = ({ options, onChange, currentValue, filterParamsItem }) => {
         }))
       : options;
 
-  const sortedOptionsArray = _.sortBy(optionsArray, ["label"], ["asc"]);
-  const currentTitle = options.find((opt) => opt.inOut == currentValue)?.label;
+  const currentTitle = options.find(
+    (opt) => opt.dateRange == currentValue
+  )?.label;
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", marginLeft: "30px" }}>
@@ -46,21 +40,19 @@ const Dropdown = ({ options, onChange, currentValue, filterParamsItem }) => {
           alignItems: "center",
         }}
       >
-
         <TitleButton
           open={open}
           currentTitle={currentTitle}
-          array={sortedOptionsArray}
+          array={optionsArray}
           onClick={handleClick}
         />
 
         <MenuDropdown
           currentTitle={currentTitle}
-          array={sortedOptionsArray}
+          array={optionsArray}
           onClose={handleClose}
           open={open}
           anchorEl={anchorEl}
-          filterParamsItem={filterParamsItem}
           handleChange={handleChange}
         />
       </Box>
@@ -68,4 +60,4 @@ const Dropdown = ({ options, onChange, currentValue, filterParamsItem }) => {
   );
 };
 
-export default Dropdown;
+export default FilterByDate;

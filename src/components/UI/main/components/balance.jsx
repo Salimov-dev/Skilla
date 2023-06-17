@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { theme } from "../../../theme";
+import { theme } from "../../../../theme";
 
 const Balance = () => {
   return (

@@ -1,5 +1,5 @@
 import { Menu, MenuItem } from "@mui/material";
-import { theme } from "../../../../../theme";
+import { theme } from "../../../../../../theme";
 
 const MenuDropdown = ({
   currentTitle,
@@ -25,7 +25,7 @@ const MenuDropdown = ({
           <MenuItem
             key={opt.id}
             onClick={handleChange}
-            value={opt.inOut}
+            value={opt.dateRange}
             name={opt.name}
             id={opt.name}
             sx={{

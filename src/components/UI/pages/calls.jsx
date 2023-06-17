@@ -3,13 +3,13 @@ import { Box, IconButton, InputBase, styled, Typography } from "@mui/material";
 import Navbar from "../navbar/navbar";
 import { theme } from "../../../theme";
 import Header from "../header/header";
-import CallsListTable from "../table/table";
+import CallsListTable from "../main/table/table";
 import { useSelector } from "react-redux";
 import { getCallsList, getCallsStatus } from "../../../store/calls-list.store";
 import Loader from "../../common/loader";
-import FiltersSearchBar from "../main/components/search-and-filters";
-
-import Balance from "../balance/balance";
+import Balance from "../main/components/balance";
+import FiltersSearchBar from "../main/filters-search-bar";
+import FilterByDate from "../main/components/filter-by-date/filter-by-date";
 
 const Component = styled(Box)`
   display: flex;
@@ -34,12 +34,14 @@ const CallsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterParams, setFilterParams] = useState({
     inOut: "",
+    dateRange: "",
   });
   const calls = useSelector(getCallsList());
   const isCallsLoading = useSelector(getCallsStatus());
   const inputSearchField = useRef(null);
   let editedSearchQuery = searchQuery.replace(/[^\d]/g, "");
   // console.log("calls", calls);
+  // console.log("filterParams", filterParams);
 
   const searchedCalls = useMemo(() => {
     return calls.filter((call) =>
@@ -62,6 +64,46 @@ const CallsPage = () => {
     inputSearchField.current.focus();
   };
 
+  const handleChange = (target) => {
+    setFilterParams((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
+  };
+
+  const optionsDateRange = [
+    {
+      id: 1,
+      label: "3 дня",
+      name: "dateRange",
+      dateRange: "3",
+    },
+    {
+      id: 2,
+      label: "Неделя",
+      name: "dateRange",
+      dateRange: "7",
+    },
+    {
+      id: 3,
+      label: "Месяц",
+      name: "dateRange",
+      dateRange: "1",
+    },
+    {
+      id: 4,
+      label: "Год",
+      name: "dateRange",
+      dateRange: "12",
+    },
+    {
+      id: 6,
+      label: "Диапазон дат",
+      name: "dateRange",
+      dateRange: "99",
+    },
+  ];
+
   return (
     <Component sx={{ backgroundColor: theme.palette.body.background }}>
       <Navbar />
@@ -78,7 +120,15 @@ const CallsPage = () => {
                 sx={{ padding: "20px 0px" }}
               >
                 <Balance />
-                <Box>menu</Box>
+
+                <Box>
+                  <FilterByDate
+                    options={optionsDateRange}
+                    onChange={handleChange}
+                    name="filterByDate"
+                    currentValue={filterParams.dateRange}
+                  />
+                </Box>
               </Box>
 
               <FiltersSearchBar

@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Box, styled } from "@mui/material";
 import dayjs from "dayjs";
 // UI
-import DurationAudioInSeconds from "../UI/table/components/duraion-audio";
+import DurationAudioInSeconds from "../UI/main/table/components/duraion-audio";
 // icons
 import { AudioPlaySVG, AudioStopSVG } from "../../data/svg-storage";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
