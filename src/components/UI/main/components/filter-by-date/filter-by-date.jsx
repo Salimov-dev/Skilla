@@ -1,6 +1,6 @@
 // libraries
-import { useState } from "react";
 import { Box } from "@mui/material";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 // components
 import MenuDropdown from "./components/menu";
@@ -12,8 +12,6 @@ import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRig
 import { loadCallsList } from "../../../../../store/calls-list.store";
 // other
 import { theme } from "../../../../../theme";
-
-
 
 const FilterByDate = ({
   options,
@@ -93,8 +91,6 @@ const FilterByDate = ({
     setAnchorEl(null);
   };
 
-
-
   return (
     <Box
       width="150px"
@@ -140,7 +136,6 @@ const FilterByDate = ({
           anchorEl={anchorEl}
           handleChange={handleChange}
         />
-       
       </Box>
     </Box>
   );

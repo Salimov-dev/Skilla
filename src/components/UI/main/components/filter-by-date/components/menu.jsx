@@ -1,4 +1,4 @@
-import { Box, Menu, MenuItem, TextField, Typography } from "@mui/material";
+import { Box, Menu, MenuItem } from "@mui/material";
 import { theme } from "../../../../../../theme";
 import { useState } from "react";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -13,17 +13,12 @@ const MenuDropdown = ({
   handleChange,
 }) => {
   const [value, setValue] = useState({ startDate: "", endDate: "" });
-  console.log("value", value);
 
   const handleChangeDateRange = ({ target }) => {
     setValue((prevState) => ({
       ...prevState,
       [target.name]: target.value,
     }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
   };
 
   return (
@@ -67,33 +62,37 @@ const MenuDropdown = ({
       })}
 
       <Box>
-        <form onSubmit={handleSubmit}>
-          <Box sx={{ padding: "14px 14px 0 14px" }}>Указать даты</Box>
-          <Box display="flex" sx={{ padding: "4px 25px 20px 15px" }}>
-            <DateField
-              name="startDate"
-              value={value.startDate}
-              onChange={handleChangeDateRange}
-            />
-            <Box
-              width="20px"
-              sx={{ padding: "0 0 0 12px", color: theme.palette.UI.icon.main }}
-            >
-              -
-            </Box>
-            <DateField
-              name="endDate"
-              value={value}
-              onChange={handleChangeDateRange}
-            />
-            <CalendarTodayIcon
-              sx={{
-                color: theme.palette.UI.icon.main,
-                marginLeft: "35px"
-              }}
-            />
+        <Box sx={{ padding: "14px 14px 0 14px" }}>Указать даты</Box>
+        <Box
+          display="flex"
+          sx={{
+            padding: "4px 25px 20px 15px",
+            "&:hover > svg": { color: theme.palette.UI.accent.main },
+          }}
+        >
+          <DateField
+            name="startDate"
+            value={value.startDate}
+            onChange={handleChangeDateRange}
+          />
+          <Box
+            width="20px"
+            sx={{ padding: "0 0 0 12px", color: theme.palette.UI.icon.main }}
+          >
+            -
           </Box>
-        </form>
+          <DateField
+            name="endDate"
+            value={value.endDate}
+            onChange={handleChangeDateRange}
+          />
+          <CalendarTodayIcon
+            sx={{
+              color: theme.palette.UI.icon.main,
+              marginLeft: "35px",
+            }}
+          />
+        </Box>
       </Box>
     </Menu>
   );

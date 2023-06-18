@@ -44,7 +44,6 @@ axios.interceptors.request.use(
 );
 
 export const loadCallsList = (data) => async (dispatch) => {
-  // console.log("data loadCallsList", typeof data);
   const getCallsEndPoint = "https://api.skilla.ru/mango/getList";
 
   const dayToday = dayjs().format("YYYY-MM-DD");
@@ -81,7 +80,6 @@ export const loadCallsList = (data) => async (dispatch) => {
       key.grade = randomGrade(key.time);
     }
 
-    // console.log("result", result);
     dispatch(callsListReceived(result));
   } catch (error) {
     dispatch(callsListFailed(error));

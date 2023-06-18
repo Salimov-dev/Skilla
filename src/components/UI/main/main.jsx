@@ -31,8 +31,6 @@ const Main = ({ refLink }) => {
   const calls = useSelector(getCallsList());
   const isCallsLoading = useSelector(getCallsStatus());
   let editedSearchQuery = searchQuery.replace(/[^\d]/g, "");
-  // console.log("calls", calls);
-  // console.log("filterParams", filterParams);
 
   const searchedCalls = useMemo(() => {
     return calls.filter((call) =>
