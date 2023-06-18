@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import  { useState } from "react";
+import { useState } from "react";
 import _ from "lodash";
 import TitleButton from "./components/title-btn";
 import MenuDropdown from "./components/menu";
@@ -7,6 +7,17 @@ import MenuDropdown from "./components/menu";
 const Dropdown = ({ options, onChange, currentValue, filterParamsItem }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const optionsArray =
+    !Array.isArray(options) && typeof options === "object"
+      ? Object.keys(options).map((optionName) => ({
+          id: options[optionName].id,
+          name: options[optionName].name,
+        }))
+      : options;
+
+  const sortedOptionsArray = _.sortBy(optionsArray, ["label"], ["asc"]);
+  const currentTitle = options.find((opt) => opt.inOut == currentValue)?.label;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,26 +38,9 @@ const Dropdown = ({ options, onChange, currentValue, filterParamsItem }) => {
     setAnchorEl(null);
   };
 
-  const optionsArray =
-    !Array.isArray(options) && typeof options === "object"
-      ? Object.keys(options).map((optionName) => ({
-          id: options[optionName].id,
-          name: options[optionName].name,
-        }))
-      : options;
-
-  const sortedOptionsArray = _.sortBy(optionsArray, ["label"], ["asc"]);
-  const currentTitle = options.find((opt) => opt.inOut == currentValue)?.label;
-
   return (
-    <Box sx={{ display: "flex", alignItems: "center", marginLeft: "30px" }}>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-
+    <Box marginLeft="30px" display="flex" alignItems="center">
+      <Box display="flex" alignItems="center">
         <TitleButton
           open={open}
           currentTitle={currentTitle}

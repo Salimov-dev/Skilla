@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Box, IconButton, InputBase, styled, Typography } from "@mui/material";
 import Navbar from "../navbar/navbar";
 import { theme } from "../../../theme";
@@ -71,6 +71,27 @@ const CallsPage = () => {
     }));
   };
 
+  const optionsCalls = [
+    {
+      id: 1,
+      label: "Все звонки",
+      name: "inOut",
+      inOut: "-1",
+    },
+    {
+      id: 2,
+      label: "Входящие звонки",
+      name: "inOut",
+      inOut: "1",
+    },
+    {
+      id: 3,
+      label: "Исходящие звонки",
+      name: "inOut",
+      inOut: "0",
+    },
+  ];
+
   const optionsDateRange = [
     {
       id: 1,
@@ -96,12 +117,6 @@ const CallsPage = () => {
       name: "dateRange",
       dateRange: "12",
     },
-    {
-      id: 6,
-      label: "Диапазон дат",
-      name: "dateRange",
-      dateRange: "99",
-    },
   ];
 
   return (
@@ -120,15 +135,14 @@ const CallsPage = () => {
                 sx={{ padding: "20px 0px" }}
               >
                 <Balance />
-
-                <Box>
-                  <FilterByDate
-                    options={optionsDateRange}
-                    onChange={handleChange}
-                    name="filterByDate"
-                    currentValue={filterParams.dateRange}
-                  />
-                </Box>
+                <FilterByDate
+                  filterParams={filterParams}
+                  setFilterParams={setFilterParams}
+                  options={optionsDateRange}
+                  onChange={handleChange}
+                  name="filterByDate"
+                  currentValue={filterParams.dateRange}
+                />
               </Box>
 
               <FiltersSearchBar
@@ -137,6 +151,7 @@ const CallsPage = () => {
                 setFilterParams={setFilterParams}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
+                options={optionsCalls}
               />
               <CallsListTable calls={filteredCalls()} />
             </Container>

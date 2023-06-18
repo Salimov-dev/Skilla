@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
-import { theme } from "../../../../../theme";
-import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
-import KeyboardControlKeyOutlinedIcon from "@mui/icons-material/KeyboardControlKeyOutlined";
+
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import { theme } from "../../../../../../theme";
 
 const TitleButton = ({ open, currentTitle, array, onClick }) => {
   return (
@@ -14,40 +14,26 @@ const TitleButton = ({ open, currentTitle, array, onClick }) => {
       sx={{
         textTransform: "none",
         color: open
-          ? theme.palette.UI.text.main
+          ? theme.palette.UI.accent.main
           : theme.palette.UI.textSecondary.main,
         "&:hover": { color: theme.palette.UI.accent.main },
-        "&:hover > svg": { color: theme.palette.UI.accent.main },
       }}
     >
+   
+
       <Typography
+        display="flex"
+        alignItems="center"
+        gap="8px"
         sx={{
           color: currentTitle !== undefined ? theme.palette.UI.accent.main : "",
         }}
       >
-        {currentTitle !== undefined
-          ? currentTitle
-          : array[0].label}
+        <CalendarTodayIcon sx={{ width: "16px", height: "18px" }} />
+        {currentTitle !== undefined ? currentTitle : array[0].label}
       </Typography>
 
-      {open ? (
-        <KeyboardControlKeyOutlinedIcon
-          sx={{
-            color: theme.palette.UI.accent.main,
-            width: "24px",
-            paddingTop: "4px",
-            marginLeft: "8px",
-          }}
-        />
-      ) : (
-        <KeyboardArrowDownOutlinedIcon
-          sx={{
-            color: theme.palette.UI.icon.main,
-            width: "24px",
-            marginLeft: "8px",
-          }}
-        />
-      )}
+     
     </Button>
   );
 };

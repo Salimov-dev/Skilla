@@ -1,10 +1,22 @@
 import { Box } from "@mui/material";
-import { useState } from "react";
-import TitleButton from "../../../../common/form/dropdown/components/title-btn";
+import { useEffect, useState } from "react";
 import MenuDropdown from "./components/menu";
+import TitleButton from "./components/title-btn";
+import { useDispatch } from "react-redux";
+import { loadCallsList } from "../../../../../store/calls-list.store";
+import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
+import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
+import { theme } from "../../../../../theme";
 
-const FilterByDate = ({ options, onChange, currentValue }) => {
+const FilterByDate = ({
+  options,
+  onChange,
+  currentValue,
+  filterParams,
+  setFilterParams,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -15,9 +27,32 @@ const FilterByDate = ({ options, onChange, currentValue }) => {
     setAnchorEl(null);
   };
 
+  let dateRangeArr = [];
+  options.forEach((el) => dateRangeArr.push(el.dateRange));
+  let dateRangeIndex = dateRangeArr.indexOf(String(filterParams.dateRange));
+  const nextRange = Number(dateRangeArr[dateRangeIndex + 1]);
+  const previousRange = Number(dateRangeArr[dateRangeIndex - 1]);
+
   const handleChange = ({ target }) => {
     onChange({ name: target.id, value: target.value });
     setAnchorEl(null);
+    dispatch(loadCallsList(target.value));
+  };
+
+  const handleChangeDateNext = () => {
+    setFilterParams((prevState) => ({
+      ...prevState,
+      dateRange: nextRange,
+    }));
+    dispatch(loadCallsList(nextRange));
+  };
+
+  const handleChangeDatePrev = () => {
+    setFilterParams((prevState) => ({
+      ...prevState,
+      dateRange: nextRange,
+    }));
+    dispatch(loadCallsList(previousRange));
   };
 
   const optionsArray =
@@ -34,17 +69,33 @@ const FilterByDate = ({ options, onChange, currentValue }) => {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", marginLeft: "30px" }}>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
+      <Box display="flex" alignItems="center">
+        <KeyboardArrowLeftOutlinedIcon
+          width="24px"
+          sx={{
+            cursor: "pointer",
+            marginRight: "8px",
+            color: theme.palette.UI.icon.main,
+            "&:hover": { color: theme.palette.UI.accent.main },
+          }}
+          onClick={handleChangeDatePrev}
+        />
         <TitleButton
           open={open}
           currentTitle={currentTitle}
           array={optionsArray}
           onClick={handleClick}
+        />
+
+        <KeyboardArrowRightOutlinedIcon
+          width="24px"
+          sx={{
+            cursor: "pointer",
+            marginRight: "8px",
+            color: theme.palette.UI.icon.main,
+            "&:hover": { color: theme.palette.UI.accent.main },
+          }}
+          onClick={handleChangeDateNext}
         />
 
         <MenuDropdown

@@ -14,6 +14,7 @@ const FiltersSearchBar = ({
   setFilterParams,
   searchQuery,
   setSearchQuery,
+  options,
 }) => {
   const handleClearFilters = () => {
     setFilterParams("");
@@ -35,27 +36,6 @@ const FiltersSearchBar = ({
     return true;
   };
 
-  const optionsCalls = [
-    {
-      id: 1,
-      label: "Все звонки",
-      name: "inOut",
-      inOut: "-1",
-    },
-    {
-      id: 2,
-      label: "Входящие звонки",
-      name: "inOut",
-      inOut: "1",
-    },
-    {
-      id: 3,
-      label: "Исходящие звонки",
-      name: "inOut",
-      inOut: "0",
-    },
-  ];
-
   return (
     <SearchAndFilters>
       <Search
@@ -69,7 +49,7 @@ const FiltersSearchBar = ({
           <ClearFiltersButton onClearFilters={handleClearFilters} />
         )}
         <Dropdown
-          options={optionsCalls}
+          options={options}
           onChange={handleChange}
           name="inOut"
           currentValue={filterParams.inOut}

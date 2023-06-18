@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import dayjs from "dayjs";
 
 const callsListSlice = createSlice({
   name: "calls",
@@ -42,10 +43,25 @@ axios.interceptors.request.use(
   }
 );
 
-export const loadCallsList = () => async (dispatch) => {
+export const loadCallsList = (data) => async (dispatch) => {
+  console.log("data loadCallsList", typeof data);
   const getCallsEndPoint = "https://api.skilla.ru/mango/getList";
-  const dateStart = "2023-06-16";
-  const dateEnd = "2023-06-17";
+
+  const dayToday = dayjs().format("YYYY-MM-DD");
+  const dayYesterday = dayjs().add(-1, "day").format("YYYY-MM-DD");
+  const threeDays = dayjs().add(-3, "day").format("YYYY-MM-DD"); // range === 3
+  const oneWeek = dayjs().add(-1, "week").format("YYYY-MM-DD"); // range === 7
+  const oneMonth = dayjs().add(-1, "month").format("YYYY-MM-DD"); // range === 1
+  const oneYear = dayjs().add(-1, "year").format("YYYY-MM-DD"); // range === 12
+
+  let dateStart = dayYesterday;
+  let dateEnd = dayToday;
+
+  if (data === undefined) dateStart;
+  if (data === 3) dateStart = threeDays;
+  if (data === 7) dateStart = oneWeek;
+  if (data === 1) dateStart = oneMonth;
+  if (data === 12) dateStart = oneYear;
 
   dispatch(callsListRequested);
   try {
@@ -60,16 +76,13 @@ export const loadCallsList = () => async (dispatch) => {
     const randomGrade = (time) => {
       return time === 0 ? 0 : random();
     };
-
     let result = data.data.results;
-
     for (let key of result) {
       key.grade = randomGrade(key.time);
     }
 
-    setTimeout(() => {
-      dispatch(callsListReceived(result));
-    }, 100);
+    console.log("result", result);
+    dispatch(callsListReceived(result));
   } catch (error) {
     dispatch(callsListFailed(error));
   }

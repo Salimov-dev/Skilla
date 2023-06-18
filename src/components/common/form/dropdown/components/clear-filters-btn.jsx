@@ -7,11 +7,11 @@ const ClearFiltersButton = ({ onClearFilters }) => {
     <Typography
       noWrap
       onClick={onClearFilters}
+      display="flex"
+      alignItems="center"
+      marginRight="50px"
       sx={{
-        display: "flex",
-        alignItems: "center",
         color: theme.palette.UI.textSecondary.main,
-        marginRight: "50px",
         cursor: "pointer",
         "&:hover": {
           color: theme.palette.UI.accent.main,
@@ -23,8 +23,8 @@ const ClearFiltersButton = ({ onClearFilters }) => {
     >
       Сбросить фильтры
       <ClearOutlinedIcon
+        width="18px"
         sx={{
-          width: "18px",
           marginLeft: "8px",
           color: theme.palette.UI.icon.main,
         }}
