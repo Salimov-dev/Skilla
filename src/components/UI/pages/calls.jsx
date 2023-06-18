@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Box, IconButton, InputBase, styled, Typography } from "@mui/material";
+import { useMemo, useRef, useState } from "react";
+import { Box, styled } from "@mui/material";
 import Navbar from "../navbar/navbar";
 import { theme } from "../../../theme";
 import Header from "../header/header";
@@ -8,8 +8,9 @@ import { useSelector } from "react-redux";
 import { getCallsList, getCallsStatus } from "../../../store/calls-list.store";
 import Loader from "../../common/loader";
 import Balance from "../main/components/balance";
-import FiltersSearchBar from "../main/filters-search-bar";
+import FiltersSearchBar from "../main/components/filters-search-bar";
 import FilterByDate from "../main/components/filter-by-date/filter-by-date";
+import Main from "../main/main";
 
 const Component = styled(Box)`
   display: flex;
@@ -124,6 +125,15 @@ const CallsPage = () => {
       <Navbar />
       <Content sx={{ paddingBottom: "546px" }}>
         <Header onSearchFieldFocus={handleSearchFieldFocus} />
+
+        <Main
+          isCallsLoading={isCallsLoading}
+          filterParams={filterParams}
+          setFilterParams={setFilterParams}
+          options={optionsDateRange}
+          onChange={handleChange}
+          currentValue={filterParams.dateRange}
+        />
         {!isCallsLoading ? (
           <MainStyled>
             <Container>

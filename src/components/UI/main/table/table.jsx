@@ -10,7 +10,7 @@ import PersonAvatar from "./components/avatar";
 import FromSite from "./components/from-site";
 import Source from "./components/source";
 import DurationAudio from "./components/duraion-audio";
-import AudioPlayer from "../../../common/form/dropdown/components/audio-player/audio-player";
+import AudioPlayer from "../../../common/form/audio-player/audio-player";
 // other
 import { theme } from "../../../../theme";
 import { BadlySVG, FineSVG, GreatSVG } from "../../../../data/svg-storage";

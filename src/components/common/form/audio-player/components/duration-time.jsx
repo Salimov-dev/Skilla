@@ -1,5 +1,5 @@
 import { styled, Box } from "@mui/material";
-import DurationAudioInSeconds from "../../../../../../UI/main/table/components/duraion-audio";
+import DurationAudioInSeconds from "../../../../UI/main/table/components/duraion-audio";
 
 const AudioTime = styled(Box)`
   width: 36px;

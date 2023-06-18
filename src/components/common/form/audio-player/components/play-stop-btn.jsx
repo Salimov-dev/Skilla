@@ -2,7 +2,7 @@ import { styled, Box } from "@mui/material";
 import {
   AudioPlaySVG,
   AudioStopSVG,
-} from "../../../../../../../data/svg-storage";
+} from "../../../../../data/svg-storage";
 
 const AudioPlay = styled(Box)`
   width: 24px;

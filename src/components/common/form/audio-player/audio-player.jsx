@@ -7,9 +7,9 @@ import PlayStopButton from "./components/play-stop-btn";
 import DurationTime from "./components/duration-time";
 import AudioInput from "./components/audio-input";
 import ButtonsBlock from "./components/buttons-block";
-// audio
-import audio from "../../../../../../assets/audio/audio.mp3";
 import Audio from "./components/audio";
+// audio
+import audio from "../../../../assets/audio/audio.mp3";
 
 const AudioStyled = styled(Box)`
   width: 100%;

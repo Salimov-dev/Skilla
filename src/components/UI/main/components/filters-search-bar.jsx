@@ -1,7 +1,7 @@
 import { Box, styled } from "@mui/material";
-import Dropdown from "../../common/form/dropdown/dropdown";
-import Search from "./components/search";
-import ClearFiltersButton from "../../common/form/dropdown/components/clear-filters-btn";
+import Dropdown from "../../../common/form/dropdown/dropdown";
+import Search from "../components/search";
+import ClearFiltersButton from "../../../common/form/dropdown/components/clear-filters-btn";
 
 const SearchAndFilters = styled(Box)`
   display: flex;

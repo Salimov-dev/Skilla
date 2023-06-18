@@ -1,12 +1,19 @@
+// libraries
+import { useState } from "react";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+// components
 import MenuDropdown from "./components/menu";
 import TitleButton from "./components/title-btn";
-import { useDispatch } from "react-redux";
-import { loadCallsList } from "../../../../../store/calls-list.store";
+// icons
 import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
+// store
+import { loadCallsList } from "../../../../../store/calls-list.store";
+// other
 import { theme } from "../../../../../theme";
+
+
 
 const FilterByDate = ({
   options,
@@ -18,42 +25,6 @@ const FilterByDate = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  let dateRangeArr = [];
-  options.forEach((el) => dateRangeArr.push(el.dateRange));
-  let dateRangeIndex = dateRangeArr.indexOf(String(filterParams.dateRange));
-  const nextRange = Number(dateRangeArr[dateRangeIndex + 1]);
-  const previousRange = Number(dateRangeArr[dateRangeIndex - 1]);
-
-  const handleChange = ({ target }) => {
-    onChange({ name: target.id, value: target.value });
-    setAnchorEl(null);
-    dispatch(loadCallsList(target.value));
-  };
-
-  const handleChangeDateNext = () => {
-    setFilterParams((prevState) => ({
-      ...prevState,
-      dateRange: nextRange,
-    }));
-    dispatch(loadCallsList(nextRange));
-  };
-
-  const handleChangeDatePrev = () => {
-    setFilterParams((prevState) => ({
-      ...prevState,
-      dateRange: nextRange,
-    }));
-    dispatch(loadCallsList(previousRange));
-  };
 
   const optionsArray =
     !Array.isArray(options) && typeof options === "object"
@@ -67,8 +38,71 @@ const FilterByDate = ({
     (opt) => opt.dateRange == currentValue
   )?.label;
 
+  let dateRangeArr = [];
+  options.forEach((el) => dateRangeArr.push(el.dateRange));
+  let dateRangeIndex = dateRangeArr.indexOf(String(filterParams.dateRange));
+  let nextRange = Number(dateRangeArr[dateRangeIndex + 1]);
+  let previousRange = Number(dateRangeArr[dateRangeIndex - 1]);
+
+  const handleChangeDateNext = () => {
+    let startRange = dateRangeArr[0];
+
+    if (dateRangeIndex + 1 === dateRangeArr.length) {
+      return setFilterParams((prevState) => ({
+        ...prevState,
+        dateRange: startRange,
+      }));
+    }
+
+    setFilterParams((prevState) => ({
+      ...prevState,
+      dateRange: nextRange,
+    }));
+
+    dispatch(loadCallsList(nextRange));
+  };
+
+  const handleChangeDatePrev = () => {
+    let startRange = dateRangeArr[0];
+
+    if (dateRangeIndex + 1 === dateRangeArr.length) {
+      return setFilterParams((prevState) => ({
+        ...prevState,
+        dateRange: startRange,
+      }));
+    }
+
+    setFilterParams((prevState) => ({
+      ...prevState,
+      dateRange: nextRange,
+    }));
+    dispatch(loadCallsList(previousRange));
+  };
+
+  const handleChange = ({ target }) => {
+    onChange({ name: target.id, value: target.value });
+    setAnchorEl(null);
+    dispatch(loadCallsList(target.value));
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
+
   return (
-    <Box sx={{ display: "flex", alignItems: "center", marginLeft: "30px" }}>
+    <Box
+      width="150px"
+      display="flex"
+      alignItems="center"
+      justifyContent="end"
+      sx={{ marginLeft: "30px" }}
+    >
       <Box display="flex" alignItems="center">
         <KeyboardArrowLeftOutlinedIcon
           width="24px"
@@ -106,6 +140,7 @@ const FilterByDate = ({
           anchorEl={anchorEl}
           handleChange={handleChange}
         />
+       
       </Box>
     </Box>
   );
